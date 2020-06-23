@@ -10,7 +10,7 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/img_news"
+            android:id="@+id/img_diary"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@color/colorPrimary"/>
@@ -22,20 +22,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_newsTitle"
+                android:id="@+id/txt_diary_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="기사 제목"
+                tools:text="제목"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:singleLine="true"
                 android:ellipsize="end"/>
 
             <TextView
-                android:id="@+id/txt_newsText"
+                android:id="@+id/txt_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="기사 내용\n"
+                tools:text="내용"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textSize="12sp"

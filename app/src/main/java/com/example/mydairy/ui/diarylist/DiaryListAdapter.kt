@@ -7,9 +7,6 @@ import com.example.mydairy.R
 import com.example.mydairy.databinding.DiaryListItemBinding
 import common.data.local.DiaryItem
 
-/**
- * 뉴스 리스트 어뎁터
- */
 class DiaryListAdapter :
     RecyclerView.Adapter<DiaryListAdapter.ItemViewHolder>() {
     class ItemViewHolder(val mbind: DiaryListItemBinding) : RecyclerView.ViewHolder(mbind.root)
@@ -32,7 +29,7 @@ class DiaryListAdapter :
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         items[position].let {
             with(holder.mbind) {
-                txtNewsTitle.text = it.title
+                txtDiaryTitle.text = it.title
             }
         }
     }
