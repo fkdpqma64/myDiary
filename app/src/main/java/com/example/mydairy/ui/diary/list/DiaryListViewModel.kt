@@ -1,4 +1,4 @@
-package com.example.mydairy.ui.diarylist
+package com.example.mydairy.ui.diary.list
 
 import android.content.Context
 import android.util.Log
@@ -9,6 +9,7 @@ import common.data.local.DiaryItem
 import common.lib.livedata.CustomViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
 import javax.inject.Inject
 
 class DiaryListViewModel @Inject constructor(
@@ -31,7 +32,8 @@ class DiaryListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Default) {
             Log.d("XXX", "${Thread.currentThread()}")
             runDataLoading {
-                mViewData.postValue(List<DiaryItem>(10){DiaryItem("다이어리 제목")})
+                val date = ZonedDateTime.now()
+                mViewData.postValue(List<DiaryItem>(10){DiaryItem(1,"제목", "내용", date)})
             }
         }
     }

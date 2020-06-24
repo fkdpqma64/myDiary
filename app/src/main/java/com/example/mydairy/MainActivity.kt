@@ -1,15 +1,19 @@
 package com.example.mydairy
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.android.newsapp.newslist.DiaryListFragment
 import com.example.mydairy.databinding.ActivityMainBinding
+import com.example.mydairy.ui.diary.list.DiaryListFragment
 import com.example.mydairy.ui.splash.SplashActivity
 import common.di.injector
+
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -62,6 +66,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun customInit() {
+        setSupportActionBar(mBind.toolbar)
+        supportActionBar?.apply {
+            title = null
+        }
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.diary_list_fragment, DiaryListFragment.newInstance()).commit()
     }
@@ -81,6 +90,21 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("ResourceAsColor")
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.create_diary -> {
+                Toast.makeText(this, "다이어리 작성", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {

@@ -2,7 +2,7 @@ package common.di
 
 import android.app.Application
 import android.content.Context
-import com.example.mydairy.ui.diarylist.DiaryListViewModel
+import com.example.mydairy.ui.diary.list.DiaryListViewModel
 import com.example.mydairy.MainViewModel
 import common.App
 import dagger.BindsInstance
