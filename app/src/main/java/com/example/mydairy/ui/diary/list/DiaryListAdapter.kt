@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mydairy.R
 import com.example.mydairy.databinding.DiaryListItemBinding
 import common.data.local.DiaryItem
+import java.time.Instant
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 class DiaryListAdapter :
@@ -34,8 +36,9 @@ class DiaryListAdapter :
         items[position].let {
             with(holder.mbind) {
                 txtDiaryTitle.text = it.title
-                txtContent.text = it.contents
-                txtDate.text = it.dateTime.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+                txtDiaryContent.text = it.contents
+                txtDate.text = Instant.ofEpochSecond(it.dateTime).atZone(ZoneId.systemDefault())
+                    .format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
             }
         }
     }

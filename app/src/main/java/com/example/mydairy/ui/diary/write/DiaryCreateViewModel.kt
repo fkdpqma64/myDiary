@@ -1,46 +1,45 @@
-package com.example.mydairy.ui.diary.list
+package com.example.mydairy.ui.diary.write
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import common.data.db.DiaryDatabase
 import common.data.local.DiaryItem
 import common.lib.livedata.CustomViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.ZonedDateTime
 import javax.inject.Inject
 
-class DiaryListViewModel @Inject constructor(
+
+class DiaryCreateViewModel @Inject constructor(
     private val context: Context
 ) : CustomViewModel() {
 
     private val mViewData = MutableLiveData<List<Any>>()
-    val viewData = mViewData.distinctUntilChanged()
+    val viewData = mViewData.value
 
     init {
 
     }
 
-    fun refreshViewData() {
-
-        if (isDataLoading()) {
-            Log.d("XXX", "already DataLoading...")
-            return
-        }
+    fun insertData(diaryItem: DiaryItem) {
         viewModelScope.launch(Dispatchers.Default) {
             Log.d("XXX", "${Thread.currentThread()}")
             runDataLoading {
                 val diaryDatabase = DiaryDatabase.getInstance(context)
-                mViewData.postValue(diaryDatabase?.diaryDao()?.selectAll())
+                diaryDatabase?.diaryDao()?.insert(diaryItem)
             }
         }
     }
 
+    fun createDiary(title: String, content: String): DiaryItem {
+        val date = ZonedDateTime.now().toEpochSecond()
+        Log.d("XXX", "$title $content")
+        if (title.isBlank())
+            return DiaryItem(null,"오늘의 일기", content, date)
+        return DiaryItem(null, title, content, date)
+    }
 }
-
-
-
-
-

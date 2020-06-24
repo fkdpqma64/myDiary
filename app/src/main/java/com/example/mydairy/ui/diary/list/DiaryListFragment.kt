@@ -96,7 +96,7 @@ class DiaryListFragment : Fragment() {
          * 클릭 리스너 - 클릭시 해당 뉴스가 담긴 웹뷰 액티비티로 전환
          */
         mAdapter.clickListener = { item ->
-            Toast.makeText(thisActivity(), item.title, Toast.LENGTH_SHORT).show()
+            Toast.makeText(thisActivity(), "${item.id}", Toast.LENGTH_SHORT).show()
 //            val intent = Intent(thisActivity(), WebViewActivity::class.java).also {
 //                it.putExtra(EXTRA_NEWS_TITLE, item.title)
 //                startActivity(intent)

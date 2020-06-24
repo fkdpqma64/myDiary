@@ -15,10 +15,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:supportsRtl,android:allowBackup">
-        <activity android:name=".ui.diary.write.DiaryCreateActivity"></activity>
+        <activity android:name=".ui.diary.write.DiaryCreateActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.mydairy.databinding.ActivityMainBinding
 import com.example.mydairy.ui.diary.list.DiaryListFragment
+import com.example.mydairy.ui.diary.write.DiaryCreateActivity
 import com.example.mydairy.ui.splash.SplashActivity
 import common.di.injector
 
@@ -90,7 +91,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -98,9 +98,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.create_diary -> {
-                Toast.makeText(this, "다이어리 작성", Toast.LENGTH_SHORT).show()
+                startActivity(
+                    DiaryCreateActivity.createIntent(this).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
+                )
             }
         }
         return super.onOptionsItemSelected(item)
