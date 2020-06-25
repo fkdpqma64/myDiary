@@ -1,7 +1,6 @@
-package com.example.mydairy.ui.diary.write
+package com.example.mydairy.ui.diary.create
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,10 +9,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import com.example.mydairy.MainActivity
 import com.example.mydairy.R
 import com.example.mydairy.databinding.ActivityDiaryCreateBinding
-import com.example.mydairy.databinding.ActivityMainBinding
 import common.di.injector
 
 class DiaryCreateActivity : AppCompatActivity() {
@@ -47,7 +44,7 @@ class DiaryCreateActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
-        menuInflater.inflate(R.menu.create_menu, menu)
+        menuInflater.inflate(R.menu.menu_create_diary, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -71,6 +68,7 @@ class DiaryCreateActivity : AppCompatActivity() {
                     dialog = builder.apply {
                         setMessage("작성을 취소합니까?")
                         setPositiveButton("예") { _, _ ->
+                            dialog.dismiss()
                             finish()
                         }
                         setNegativeButton("아니오") { _, _ ->

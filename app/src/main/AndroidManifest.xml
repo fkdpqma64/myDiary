@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:supportsRtl,android:allowBackup">
-        <activity android:name=".ui.diary.write.DiaryCreateActivity" />
+        <activity android:name=".ui.diary.view.DiaryViewActivity"></activity>
+        <activity android:name=".ui.diary.create.DiaryCreateActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/Theme.Design.NoActionBar" />

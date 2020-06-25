@@ -25,7 +25,7 @@
                 android:id="@+id/diary_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/diary_list_item" />
+                tools:listitem="@layout/list_item_diary" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

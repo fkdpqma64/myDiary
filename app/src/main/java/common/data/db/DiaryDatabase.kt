@@ -8,7 +8,7 @@ import common.data.db.dao.DiaryDao
 import common.data.local.DiaryItem
 import javax.inject.Inject
 
-@Database(entities = [DiaryItem::class], version = 1, exportSchema = false)
+@Database(entities = [DiaryItem::class], version = 2, exportSchema = false)
 abstract class DiaryDatabase: RoomDatabase() {
     abstract fun diaryDao(): DiaryDao
 

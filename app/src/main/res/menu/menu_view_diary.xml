@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bookmark_diary"
+        android:icon="@drawable/button_bookmark"
+        android:title="@string/bookmark"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/update_diary"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="@string/update"
+        app:iconTint="@color/colorPrimary"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/delete_diary"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="@string/delete"
+        app:iconTint="@color/colorPrimary"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/confirm_diary"
+        app:showAsAction="always"
+        android:title="@string/update"
+        android:visible="false"/>
+</menu>

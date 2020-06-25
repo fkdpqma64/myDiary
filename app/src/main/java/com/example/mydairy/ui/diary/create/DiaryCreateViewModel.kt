@@ -1,8 +1,7 @@
-package com.example.mydairy.ui.diary.write
+package com.example.mydairy.ui.diary.create
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import common.data.db.DiaryDatabase
@@ -39,7 +38,7 @@ class DiaryCreateViewModel @Inject constructor(
         val date = ZonedDateTime.now().toEpochSecond()
         Log.d("XXX", "$title $content")
         if (title.isBlank())
-            return DiaryItem(null,"오늘의 일기", content, date)
-        return DiaryItem(null, title, content, date)
+            return DiaryItem(null,"오늘의 일기", content, date, date,false)
+        return DiaryItem(null, title, content, date, date,false)
     }
 }

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.diary.write.DiaryCreateActivity"
+        tools:context=".ui.diary.create.DiaryCreateActivity"
         android:background="#FFF">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -31,7 +31,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -43,6 +43,7 @@
                     android:textSize="20sp"
                     android:layout_margin="8dp"
                     android:background="#fff"
+                    android:maxLength="60"
                     android:maxLines="2"/>
 
                 <TextView

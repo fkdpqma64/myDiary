@@ -1,6 +1,5 @@
 package com.example.mydairy
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.mydairy.databinding.ActivityMainBinding
 import com.example.mydairy.ui.diary.list.DiaryListFragment
-import com.example.mydairy.ui.diary.write.DiaryCreateActivity
+import com.example.mydairy.ui.diary.create.DiaryCreateActivity
 import com.example.mydairy.ui.splash.SplashActivity
 import common.di.injector
 
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.diary_list_fragment, DiaryListFragment.newInstance()).commit()
+            .replace(R.id.fragment_diary_list, DiaryListFragment.newInstance()).commit()
     }
 
     /**
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

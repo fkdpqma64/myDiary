@@ -1,5 +1,6 @@
 package com.example.mydairy.ui.diary.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mydairy.MainActivity
 import com.example.mydairy.R
 import com.example.mydairy.databinding.FragmentDiaryListBinding
+import com.example.mydairy.ui.diary.view.DiaryViewActivity
 import common.data.local.DiaryItem
 import common.di.injector
 import kotlinx.coroutines.launch
@@ -21,6 +23,7 @@ class DiaryListFragment : Fragment() {
 
     companion object {
         fun newInstance() = DiaryListFragment()
+        const val EXTRA_DIARY_ITEM_ID = "EXTRA_DIARY_ITEM_ID"
     }
 
     private lateinit var mBind: FragmentDiaryListBinding
@@ -42,6 +45,11 @@ class DiaryListFragment : Fragment() {
         customInit()
         setupEvents()
         setupRecyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mViewModel.refreshViewData()
     }
 
     private fun customInit() {
@@ -92,19 +100,16 @@ class DiaryListFragment : Fragment() {
         }
         mAdapter = DiaryListAdapter()
 
-        /**
-         * 클릭 리스너 - 클릭시 해당 뉴스가 담긴 웹뷰 액티비티로 전환
-         */
         mAdapter.clickListener = { item ->
-            Toast.makeText(thisActivity(), "${item.id}", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(thisActivity(), WebViewActivity::class.java).also {
-//                it.putExtra(EXTRA_NEWS_TITLE, item.title)
-//                startActivity(intent)
-//            }
-
+            DiaryViewActivity.createIntent(requireContext()).also {
+                it.putExtra(EXTRA_DIARY_ITEM_ID, item.id)
+                startActivity(it)
+            }
         }
     }
+
     private fun thisActivity(): MainActivity? {
         return activity as? MainActivity
     }
+
 }

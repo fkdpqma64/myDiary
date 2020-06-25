@@ -6,5 +6,5 @@
         android:icon="@drawable/ic_baseline_add_box_24"
         app:showAsAction="always"
         app:iconTint="@color/colorPrimary"
-        android:title="Create" />
+        android:title="@string/create_diary" />
 </menu>

@@ -5,4 +5,8 @@
     <string name="txt_diary_title_hint">오늘의 일기</string>
     <string name="txt_diary_content_hint">일기를 작성해 보세요.</string>
     <string name="need_diary_text">일기를 작성해 주세요.</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="txt_empty">내용이 비어있습니다.</string>
 </resources>
