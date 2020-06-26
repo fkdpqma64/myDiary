@@ -25,7 +25,7 @@ class DiaryCreateViewModel @Inject constructor(
     }
 
     fun insertData(diaryItem: DiaryItem) {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "${Thread.currentThread()}")
             runDataLoading {
                 val diaryDatabase = DiaryDatabase.getInstance(context)

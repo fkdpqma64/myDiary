@@ -5,8 +5,10 @@ import android.content.Context
 import com.example.mydairy.ui.diary.list.DiaryListViewModel
 import com.example.mydairy.MainViewModel
 import com.example.mydairy.ui.diary.create.DiaryCreateViewModel
+import com.example.mydairy.ui.diary.list.bookmark.DiaryBookMarkListViewModel
 import com.example.mydairy.ui.diary.view.DiaryViewActivityViewModel
 import com.example.mydairy.ui.diary.view.fragment.DiaryViewFragmentViewModel
+import com.example.mydairy.ui.leftmenu.LeftmenuViewModel
 import common.App
 import dagger.BindsInstance
 import dagger.Component
@@ -38,4 +40,6 @@ interface AppComponent {
     val diaryCreateViewModel: DiaryCreateViewModel
     val diaryViewActivityViewModel: DiaryViewActivityViewModel
     val diaryViewFragmentViewModel: DiaryViewFragmentViewModel
+    val leftmenuViewModel: LeftmenuViewModel
+    val diaryBookMarkListViewModel: DiaryBookMarkListViewModel
 }

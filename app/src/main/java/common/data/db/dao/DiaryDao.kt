@@ -16,6 +16,9 @@ interface DiaryDao : BaseDao<DiaryItem> {
     @Query("SELECT * FROM diaryTable ORDER BY createTime DESC LIMIT ${BuildVar.PAGE_LIMIT} OFFSET :offset")
     fun selectAllPage(offset: Int): List<DiaryItem>
 
+    @Query("SELECT * FROM diaryTable WHERE bookMark = True ORDER BY createTime DESC LIMIT ${BuildVar.PAGE_LIMIT} OFFSET :offset")
+    fun selectAllBookMarkPage(offset: Int): List<DiaryItem>
+
     @Query("DELETE FROM diaryTable WHERE id = :id")
     fun deleteById(id: Int)
 }

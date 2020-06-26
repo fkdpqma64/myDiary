@@ -2,15 +2,20 @@ package com.example.mydairy
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import com.example.mydairy.databinding.ActivityMainBinding
-import com.example.mydairy.ui.diary.list.DiaryListFragment
 import com.example.mydairy.ui.diary.create.DiaryCreateActivity
+import com.example.mydairy.ui.diary.list.DiaryListFragment
 import com.example.mydairy.ui.splash.SplashActivity
 import common.di.injector
 
@@ -42,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mViewModel by lazy { injector.mainViewModel }
     private val mApp by lazy { injector.app }
+    private var mDrawerToggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val launchFromLink = mApp.backupMainIntent(intent)
@@ -68,9 +74,11 @@ class MainActivity : AppCompatActivity() {
     private fun customInit() {
         setSupportActionBar(mBind.toolbar)
         supportActionBar?.apply {
+            setHomeButtonEnabled(true)
             title = null
+            elevation = 0f
         }
-
+        setupDrawerLayout()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_diary_list, DiaryListFragment.newInstance()).commit()
     }
@@ -90,6 +98,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        mDrawerToggle?.syncState()
+    }
+
+    private fun setupDrawerLayout() {
+        mBind.navView.visibility = View.VISIBLE
+        val toggle = ActionBarDrawerToggle(
+            this,
+            mBind.drawerLayout,
+            mBind.toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+
+        mBind.drawerLayout.addDrawerListener(toggle)
+        toggle.isDrawerIndicatorEnabled = true
+        toggle.syncState()
+        mDrawerToggle = toggle
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -97,17 +126,40 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (mDrawerToggle?.onOptionsItemSelected(item) == true)
+            return true
+
         when (item.itemId) {
+            android.R.id.home -> {
+                if (mBind.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mBind.drawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    mBind.drawerLayout.openDrawer(GravityCompat.START)
+                }
+                return true
+            }
+
             R.id.create_diary -> {
                 startActivity(
-                    DiaryCreateActivity.createIntent(this).addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
+                    DiaryCreateActivity.createIntent(this)
+                        .addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
                 )
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        mDrawerToggle?.onConfigurationChanged(newConfig)
+    }
+
     override fun onBackPressed() {
+        if (mBind.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mBind.drawerLayout.closeDrawer(GravityCompat.START)
+            return
+        }
+
         if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
             return
