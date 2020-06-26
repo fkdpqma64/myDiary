@@ -2,15 +2,18 @@ package com.example.mydairy.ui.diary.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mydairy.MainActivity
 import com.example.mydairy.R
 import com.example.mydairy.databinding.FragmentDiaryListBinding
@@ -53,7 +56,7 @@ class DiaryListFragment : Fragment() {
     }
 
     private fun customInit() {
-        mViewModel.refreshViewData()
+      //  mViewModel.refreshViewData()
     }
 
     private fun setupEvents() {
@@ -89,6 +92,21 @@ class DiaryListFragment : Fragment() {
             }
         })
 
+        mBind.diaryList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = LinearLayoutManager::class.java.cast(recyclerView.layoutManager)!!
+                val totalItemCount = layoutManager.itemCount
+                val lastVisible = layoutManager.findLastCompletelyVisibleItemPosition()
+
+                if (lastVisible >= totalItemCount - 1) {
+                    Log.d("XXX", "lastVisibled $totalItemCount")
+                    mViewModel.scrollViewData()
+                    recyclerView.post {
+                        mAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        })
     }
 
     /**

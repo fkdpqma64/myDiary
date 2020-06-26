@@ -69,10 +69,12 @@ class DiaryViewFragment : Fragment() {
         mViewModel.viewData.observe(this, Observer { diary ->
             when (diary.bookMark) {
                 true -> {
-                    menu.findItem(R.id.bookmark_diary).setIcon(R.drawable.ic_baseline_bookmark_24_on)
+                    menu.findItem(R.id.bookmark_diary)
+                        .setIcon(R.drawable.ic_baseline_bookmark_24_on)
                 }
                 false -> {
-                    menu.findItem(R.id.bookmark_diary).setIcon(R.drawable.ic_baseline_bookmark_24_off)
+                    menu.findItem(R.id.bookmark_diary)
+                        .setIcon(R.drawable.ic_baseline_bookmark_24_off)
                 }
             }
         })
@@ -135,6 +137,9 @@ class DiaryViewFragment : Fragment() {
             }
 
             android.R.id.home -> {
+                val imm =
+                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(mBind.txtDiaryTitle.windowToken, 0)
                 thisActivity()?.finish()
             }
         }
@@ -151,6 +156,10 @@ class DiaryViewFragment : Fragment() {
 
                 mBind.txtDiaryTitle.isEnabled = false
                 mBind.txtDiaryContent.isEnabled = false
+
+                val imm =
+                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(mBind.txtDiaryTitle.windowToken, 0)
             }
 
             FRAGMENT_MODE_UPDATE_DIARY -> {
@@ -167,9 +176,7 @@ class DiaryViewFragment : Fragment() {
                 val imm =
                     context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.toggleSoftInput(
-                    InputMethodManager.SHOW_FORCED,
-                    InputMethodManager.HIDE_IMPLICIT_ONLY
-                )
+                    InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
             }
         }

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
+import common.BuildVar
 import common.data.db.DiaryDatabase
 import common.data.local.DiaryItem
 import common.lib.livedata.CustomViewModel
@@ -18,7 +19,8 @@ class DiaryListViewModel @Inject constructor(
 
     private val mViewData = MutableLiveData<List<Any>>()
     val viewData = mViewData.distinctUntilChanged()
-
+    private var mPageOffset = BuildVar.PAGELIMIT
+    private val diaryDatabase = DiaryDatabase.getInstance(context)
     init {
 
     }
@@ -30,10 +32,30 @@ class DiaryListViewModel @Inject constructor(
             return
         }
         viewModelScope.launch(Dispatchers.Default) {
-            Log.d("XXX", "${Thread.currentThread()}")
+            Log.d("XXX", "Refreshnig Data...")
             runDataLoading {
-                val diaryDatabase = DiaryDatabase.getInstance(context)
-                mViewData.postValue(diaryDatabase?.diaryDao()?.selectAll())
+                mPageOffset = BuildVar.PAGELIMIT
+                mViewData.postValue(diaryDatabase?.diaryDao()?.selectAllPage(0))
+            }
+        }
+    }
+
+    fun scrollViewData() {
+
+        if (isDataLoading()) {
+            Log.d("XXX", "already DataLoading...")
+            return
+        }
+        viewModelScope.launch(Dispatchers.Default) {
+            Log.d("XXX", "Scrolling...")
+            runDataLoading {
+                val previewData = viewData.value as MutableList<DiaryItem>
+                    diaryDatabase?.diaryDao()?.selectAllPage(mPageOffset)?.forEach {
+                        previewData.add(it)
+                    }
+                Log.d("XXX", "${previewData.count()}")
+                mViewData.postValue(previewData)
+                mPageOffset += BuildVar.PAGELIMIT
             }
         }
     }
