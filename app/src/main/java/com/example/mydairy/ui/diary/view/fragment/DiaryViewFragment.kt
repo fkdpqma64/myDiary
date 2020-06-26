@@ -7,15 +7,14 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.mydairy.R
 import com.example.mydairy.databinding.FragmentDiaryViewBinding
 import com.example.mydairy.ui.diary.view.DiaryViewActivity
+import common.BuildVar
 import common.di.injector
-import common.util.Util
 
 class DiaryViewFragment : Fragment() {
 
@@ -59,8 +58,8 @@ class DiaryViewFragment : Fragment() {
         mViewModel.viewData.observe(viewLifecycleOwner, Observer {
             mBind.txtDiaryTitle.text.append(it.title)
             mBind.txtDiaryContent.text.append(it.contents)
-            mBind.txtDate.text = "- ${Util.longToTime(it.createTime)} -"
-            mBind.txtUpdate.text = "수정됨: ${Util.longToTime(it.updateTime)}"
+            mBind.txtDate.text = "- ${BuildVar.longToTime(it.createTime)} -"
+            mBind.txtUpdate.text = "수정됨: ${BuildVar.longToTime(it.updateTime)}"
         })
     }
 
@@ -97,9 +96,12 @@ class DiaryViewFragment : Fragment() {
                     when (diary.bookMark) {
                         true -> {
                             item.setIcon(R.drawable.ic_baseline_bookmark_24_on)
+                            Toast.makeText(thisActivity(), "북마크 추가", Toast.LENGTH_SHORT).show()
                         }
                         false -> {
                             item.setIcon(R.drawable.ic_baseline_bookmark_24_off)
+                            Toast.makeText(thisActivity(), "북마크 해제", Toast.LENGTH_SHORT).show()
+
                         }
                     }
                     mViewModel.updateData(diary)

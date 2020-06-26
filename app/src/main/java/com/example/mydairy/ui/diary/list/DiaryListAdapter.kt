@@ -4,12 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mydairy.R
 import com.example.mydairy.databinding.ListItemDiaryBinding
+import common.BuildVar
 import common.data.local.DiaryItem
-import common.util.Util
 
 class DiaryListAdapter :
     RecyclerView.Adapter<DiaryListAdapter.ItemViewHolder>() {
@@ -40,7 +39,7 @@ class DiaryListAdapter :
             with(holder.mbind) {
                 txtDiaryTitle.text = it.title
                 txtDiaryContent.text = it.contents
-                txtDate.text = Util.longToTime(it.createTime)
+                txtDate.text = BuildVar.longToTime(it.createTime)
                 if (it.bookMark)
                     imgBookmark.visibility = View.VISIBLE
                 else

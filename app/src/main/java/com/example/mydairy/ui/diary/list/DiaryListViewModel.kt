@@ -19,7 +19,7 @@ class DiaryListViewModel @Inject constructor(
 
     private val mViewData = MutableLiveData<List<Any>>()
     val viewData = mViewData.distinctUntilChanged()
-    private var mPageOffset = BuildVar.PAGELIMIT
+    private var mPageOffset = BuildVar.PAGE_LIMIT
     private val diaryDatabase = DiaryDatabase.getInstance(context)
     init {
 
@@ -31,10 +31,10 @@ class DiaryListViewModel @Inject constructor(
             Log.d("XXX", "already DataLoading...")
             return
         }
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "Refreshnig Data...")
             runDataLoading {
-                mPageOffset = BuildVar.PAGELIMIT
+                mPageOffset = BuildVar.PAGE_LIMIT
                 mViewData.postValue(diaryDatabase?.diaryDao()?.selectAllPage(0))
             }
         }
@@ -46,7 +46,7 @@ class DiaryListViewModel @Inject constructor(
             Log.d("XXX", "already DataLoading...")
             return
         }
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "Scrolling...")
             runDataLoading {
                 val previewData = viewData.value as MutableList<DiaryItem>
@@ -55,7 +55,7 @@ class DiaryListViewModel @Inject constructor(
                     }
                 Log.d("XXX", "${previewData.count()}")
                 mViewData.postValue(previewData)
-                mPageOffset += BuildVar.PAGELIMIT
+                mPageOffset += BuildVar.PAGE_LIMIT
             }
         }
     }

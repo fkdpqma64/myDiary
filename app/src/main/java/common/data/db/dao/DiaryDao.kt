@@ -13,7 +13,7 @@ interface DiaryDao : BaseDao<DiaryItem> {
     @Query("SELECT * FROM diaryTable ORDER BY createTime DESC")
     fun selectAll(): List<DiaryItem>
 
-    @Query("SELECT * FROM diaryTable ORDER BY createTime DESC LIMIT ${BuildVar.PAGELIMIT} OFFSET :offset")
+    @Query("SELECT * FROM diaryTable ORDER BY createTime DESC LIMIT ${BuildVar.PAGE_LIMIT} OFFSET :offset")
     fun selectAllPage(offset: Int): List<DiaryItem>
 
     @Query("DELETE FROM diaryTable WHERE id = :id")

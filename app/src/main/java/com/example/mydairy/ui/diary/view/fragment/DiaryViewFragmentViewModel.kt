@@ -32,7 +32,7 @@ class DiaryViewFragmentViewModel @Inject constructor(
             Log.d("XXX", "already DataLoading...")
             return
         }
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "Selecting data...")
             runDataLoading {
                 mViewData.postValue(diaryDatabase?.diaryDao()?.selectById(id))
@@ -41,7 +41,7 @@ class DiaryViewFragmentViewModel @Inject constructor(
     }
 
     fun updateData(diaryItem: DiaryItem) {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "Updating data...")
             runDataLoading {
                 diaryDatabase?.diaryDao()?.update(diaryItem)
@@ -50,7 +50,7 @@ class DiaryViewFragmentViewModel @Inject constructor(
     }
 
     fun deleteData(id: Int) {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "deleting data...")
             runDataLoading {
                 diaryDatabase?.diaryDao()?.deleteById(id)
