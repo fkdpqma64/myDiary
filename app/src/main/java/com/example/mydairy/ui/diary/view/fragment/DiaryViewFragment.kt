@@ -7,6 +7,7 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -65,11 +66,21 @@ class DiaryViewFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         mMenu = menu
+        mViewModel.viewData.observe(this, Observer { diary ->
+            when (diary.bookMark) {
+                true -> {
+                    menu.findItem(R.id.bookmark_diary).setIcon(R.drawable.ic_baseline_bookmark_24_on)
+                }
+                false -> {
+                    menu.findItem(R.id.bookmark_diary).setIcon(R.drawable.ic_baseline_bookmark_24_off)
+                }
+            }
+        })
         super.onPrepareOptionsMenu(menu)
     }
 
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.update_diary -> {
@@ -78,14 +89,18 @@ class DiaryViewFragment : Fragment() {
             }
 
             R.id.bookmark_diary -> {
-                val data = mViewModel.viewData.value
-                if (data != null) {
-                    data.bookMark = !data.bookMark
-                    if (!data.bookMark)
-                    item.icon.setTint(R.color.colorPrimary)
-                    else
-                        item.icon.setTint(R.color.disabled)
-                    mViewModel.updateData(data)
+                val diary = mViewModel.viewData.value
+                if (diary != null) {
+                    diary.bookMark = !diary.bookMark
+                    when (diary.bookMark) {
+                        true -> {
+                            item.setIcon(R.drawable.ic_baseline_bookmark_24_on)
+                        }
+                        false -> {
+                            item.setIcon(R.drawable.ic_baseline_bookmark_24_off)
+                        }
+                    }
+                    mViewModel.updateData(diary)
                 }
             }
 
@@ -131,6 +146,7 @@ class DiaryViewFragment : Fragment() {
             FRAGMENT_MODE_VIEW_DIARY -> {
                 mMenu.findItem(R.id.delete_diary).isVisible = true
                 mMenu.findItem(R.id.update_diary).isVisible = true
+                mMenu.findItem(R.id.bookmark_diary).isVisible = true
                 mMenu.findItem(R.id.confirm_diary).isVisible = false
 
                 mBind.txtDiaryTitle.isEnabled = false
@@ -140,6 +156,7 @@ class DiaryViewFragment : Fragment() {
             FRAGMENT_MODE_UPDATE_DIARY -> {
                 mMenu.findItem(R.id.delete_diary).isVisible = false
                 mMenu.findItem(R.id.update_diary).isVisible = false
+                mMenu.findItem(R.id.bookmark_diary).isVisible = false
                 mMenu.findItem(R.id.confirm_diary).isVisible = true
 
                 mBind.txtDiaryTitle.isEnabled = true

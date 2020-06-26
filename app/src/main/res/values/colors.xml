@@ -5,5 +5,5 @@
     <color name="colorAccent">#55F</color>
     <color name="textColorBold">#333</color>
     <color name="textColor">#777</color>
-    <color name="disabled">#ccc</color>
+    <color name="disabled">#CCC</color>
 </resources>
