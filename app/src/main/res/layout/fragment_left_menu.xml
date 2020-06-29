@@ -20,7 +20,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingLeft="8dp"
-                android:paddingTop="64dp"
+                android:paddingTop="80dp"
                 android:paddingRight="8dp"
                 android:paddingBottom="16dp">
 
@@ -35,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/app_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
