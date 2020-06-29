@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mydairy.MainActivity
@@ -20,16 +19,16 @@ import common.data.local.DiaryItem
 import common.di.injector
 import kotlinx.coroutines.launch
 
-class DiaryBookMarkListFragment : Fragment() {
+class DiaryBookmarkListFragment : Fragment() {
 
     companion object {
-        fun newInstance() = DiaryBookMarkListFragment()
+        fun newInstance() = DiaryBookmarkListFragment()
         const val EXTRA_DIARY_ITEM_ID = "EXTRA_DIARY_ITEM_ID"
     }
 
     private lateinit var mBind: FragmentDiaryListBinding
-    private lateinit var mAdapterBookMark: DiaryBookMarkListAdapter
-    private val mViewModel by lazy { requireActivity().injector.diaryBookMarkListViewModel }
+    private lateinit var mAdapterBookmark: DiaryBookmarkListAdapter
+    private val mViewModel by lazy { requireActivity().injector.diaryBookmarkListViewModel }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +51,7 @@ class DiaryBookMarkListFragment : Fragment() {
         super.onResume()
         mViewModel.refreshViewData()
         mBind.diaryList.post {
-            mAdapterBookMark.notifyDataSetChanged()
+            mAdapterBookmark.notifyDataSetChanged()
         }
     }
 
@@ -70,10 +69,10 @@ class DiaryBookMarkListFragment : Fragment() {
                 mBind.progressBar.visibility = View.VISIBLE
             }
             lifecycleScope.launch {
-                mAdapterBookMark.items = it as List<DiaryItem>
+                mAdapterBookmark.items = it as List<DiaryItem>
                 mBind.progressBar.visibility = View.GONE
-                mAdapterBookMark.notifyDataSetChanged()
-                mBind.diaryList.adapter = mAdapterBookMark
+                mAdapterBookmark.notifyDataSetChanged()
+                mBind.diaryList.adapter = mAdapterBookmark
                 mBind.diaryList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             }
         })
@@ -84,7 +83,7 @@ class DiaryBookMarkListFragment : Fragment() {
         mBind.swipeLayout.setOnRefreshListener {
             mViewModel.refreshViewData()
             mBind.diaryList.post {
-                mAdapterBookMark.notifyDataSetChanged()
+                mAdapterBookmark.notifyDataSetChanged()
             }
         }
 
@@ -108,7 +107,7 @@ class DiaryBookMarkListFragment : Fragment() {
                     Log.d("XXX", "lastVisibled $totalItemCount")
                     mViewModel.scrollViewData()
                     recyclerView.post {
-                        mAdapterBookMark.notifyDataSetChanged()
+                        mAdapterBookmark.notifyDataSetChanged()
                     }
                 }
             }
@@ -122,9 +121,9 @@ class DiaryBookMarkListFragment : Fragment() {
         mBind.diaryList.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-        mAdapterBookMark = DiaryBookMarkListAdapter()
+        mAdapterBookmark = DiaryBookmarkListAdapter()
 
-        mAdapterBookMark.clickListener = { item ->
+        mAdapterBookmark.clickListener = { item ->
             DiaryViewActivity.createIntent(requireContext()).also {
                 it.putExtra(EXTRA_DIARY_ITEM_ID, item.id)
                 startActivity(it)

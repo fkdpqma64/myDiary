@@ -13,20 +13,20 @@ import com.example.mydairy.MainActivity
 import com.example.mydairy.R
 import com.example.mydairy.databinding.FragmentLeftMenuBinding
 import com.example.mydairy.ui.diary.list.DiaryListFragment
-import com.example.mydairy.ui.diary.list.bookmark.DiaryBookMarkListFragment
+import com.example.mydairy.ui.diary.list.bookmark.DiaryBookmarkListFragment
 import common.data.local.MenuTextValueItem
 import common.di.injector
 import kotlinx.coroutines.launch
 
-class LeftmenuFragment : Fragment() {
+class LeftMenuFragment : Fragment() {
 
     companion object {
-        fun newInstance() = LeftmenuFragment()
+        fun newInstance() = LeftMenuFragment()
     }
 
     private lateinit var mBind: FragmentLeftMenuBinding
-    private lateinit var mAdapter: LeftmenuAdapter
-    private val mViewModel by lazy { requireActivity().injector.leftmenuViewModel }
+    private lateinit var mAdapter: LeftMenuAdapter
+    private val mViewModel by lazy { requireActivity().injector.leftMenuViewModel }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +72,7 @@ class LeftmenuFragment : Fragment() {
         mBind.recyclerView.apply {
             layoutManager = LinearLayoutManager(thisActivity())
         }
-        mAdapter = LeftmenuAdapter()
+        mAdapter = LeftMenuAdapter()
 
         mAdapter.clickListener = { item ->
             if (thisActivity() != null) {
@@ -87,7 +87,7 @@ class LeftmenuFragment : Fragment() {
                         thisActivity()!!.supportFragmentManager.beginTransaction()
                             .replace(
                                 R.id.fragment_diary_list,
-                                DiaryBookMarkListFragment.newInstance()
+                                DiaryBookmarkListFragment.newInstance()
                             ).commit()
                         thisActivity()!!.onBackPressed()
                     }

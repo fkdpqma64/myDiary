@@ -63,7 +63,7 @@
             android:visibility="visible">
 
             <fragment
-                android:name="com.example.mydairy.ui.leftmenu.LeftmenuFragment"
+                android:name="com.example.mydairy.ui.leftmenu.LeftMenuFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_left_menu" />

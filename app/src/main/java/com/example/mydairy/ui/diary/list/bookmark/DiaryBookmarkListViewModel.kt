@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DiaryBookMarkListViewModel @Inject constructor(
+class DiaryBookmarkListViewModel @Inject constructor(
     private val context: Context
 ) : CustomViewModel() {
 
@@ -50,12 +50,12 @@ class DiaryBookMarkListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             Log.d("XXX", "Scrolling...")
             runDataLoading {
-                val previewData = viewData.value as MutableList<DiaryItem>
+                val preData = viewData.value as MutableList<DiaryItem>
                 diaryDatabase?.diaryDao()?.selectAllBookMarkPage(mPageOffset)?.forEach {
-                    previewData.add(it)
+                    preData.add(it)
                 }
-                Log.d("XXX", "${previewData.count()}")
-                mViewData.postValue(previewData)
+                Log.d("XXX", "${preData.count()}")
+                mViewData.postValue(preData)
                 mPageOffset += BuildVar.PAGE_LIMIT
             }
         }

@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mydairy.R
-import com.example.mydairy.databinding.ListItemDiaryBinding
 import com.example.mydairy.databinding.ListItemDiaryBookmarkBinding
 import common.BuildVar
 import common.data.local.DiaryItem
 
-class DiaryBookMarkListAdapter :
-    RecyclerView.Adapter<DiaryBookMarkListAdapter.ItemViewHolder>() {
+class DiaryBookmarkListAdapter :
+    RecyclerView.Adapter<DiaryBookmarkListAdapter.ItemViewHolder>() {
     class ItemViewHolder(val mbind: ListItemDiaryBookmarkBinding) : RecyclerView.ViewHolder(mbind.root)
 
     lateinit var items: List<DiaryItem>

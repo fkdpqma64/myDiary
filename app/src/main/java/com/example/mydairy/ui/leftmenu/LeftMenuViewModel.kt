@@ -7,7 +7,7 @@ import common.data.local.MenuTextValueItem
 import common.lib.livedata.CustomViewModel
 import javax.inject.Inject
 
-class LeftmenuViewModel @Inject constructor(
+class LeftMenuViewModel @Inject constructor(
     private val context: Context
 ) : CustomViewModel() {
 

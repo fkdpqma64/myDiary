@@ -8,8 +8,8 @@ import com.example.mydairy.R
 import com.example.mydairy.databinding.ListItemLeftMenuBinding
 import common.data.local.MenuTextValueItem
 
-class LeftmenuAdapter :
-    RecyclerView.Adapter<LeftmenuAdapter.ItemViewHolder>() {
+class LeftMenuAdapter :
+    RecyclerView.Adapter<LeftMenuAdapter.ItemViewHolder>() {
     class ItemViewHolder(val mbind: ListItemLeftMenuBinding) : RecyclerView.ViewHolder(mbind.root)
 
     lateinit var items: List<MenuTextValueItem>
