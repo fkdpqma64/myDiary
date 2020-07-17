@@ -1,10 +1,12 @@
 package com.example.mydairy.ui.diary.list
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,6 +20,7 @@ import com.example.mydairy.ui.diary.view.DiaryViewActivity
 import common.data.local.DiaryItem
 import common.di.injector
 import kotlinx.coroutines.launch
+
 
 class DiaryListFragment : Fragment() {
 
@@ -54,6 +57,8 @@ class DiaryListFragment : Fragment() {
 
     private fun customInit() {
       // mViewModel.refreshViewData()
+        val animation = AnimationUtils.loadLayoutAnimation(thisActivity(), R.anim.layout_animation_fall_down)
+        mBind.diaryList.layoutAnimation = animation
     }
 
     private fun setupEvents() {
@@ -68,8 +73,9 @@ class DiaryListFragment : Fragment() {
             lifecycleScope.launch {
                 mAdapter.items = it as List<DiaryItem>
                 mBind.progressBar.visibility = View.GONE
-                mAdapter.notifyDataSetChanged()
+               // mAdapter.notifyDataSetChanged()
                 mBind.diaryList.adapter = mAdapter
+                runLayoutAnimation(mBind.diaryList)
             }
         })
 
@@ -124,6 +130,18 @@ class DiaryListFragment : Fragment() {
                 startActivity(it)
             }
         }
+    }
+
+    private fun runLayoutAnimation(recyclerView: RecyclerView) {
+        val context: Context = recyclerView.context
+        val controller =
+            AnimationUtils.loadLayoutAnimation(
+                context,
+                R.anim.layout_animation_fall_down
+            )
+        recyclerView.layoutAnimation = controller
+        recyclerView.adapter!!.notifyDataSetChanged()
+        recyclerView.scheduleLayoutAnimation()
     }
 
     private fun thisActivity(): MainActivity? {

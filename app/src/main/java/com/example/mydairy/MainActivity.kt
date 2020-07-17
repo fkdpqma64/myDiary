@@ -56,12 +56,9 @@ class MainActivity : AppCompatActivity() {
          * 스플래쉬 화면 실행
          */
         if (!launchFromLink && checkNeedSplashVisit(mSplashVisited)) {
-            super.onCreate(savedInstanceState)
-            finish()
             startActivity(
                 SplashActivity.createIntent(this).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             )
-            return
         }
 
         super.onCreate(savedInstanceState)

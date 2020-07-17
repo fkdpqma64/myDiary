@@ -1,10 +1,12 @@
 package com.example.mydairy.ui.diary.list.bookmark
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -71,9 +73,9 @@ class DiaryBookmarkListFragment : Fragment() {
             lifecycleScope.launch {
                 mAdapterBookmark.items = it as List<DiaryItem>
                 mBind.progressBar.visibility = View.GONE
-                mAdapterBookmark.notifyDataSetChanged()
-                mBind.diaryList.adapter = mAdapterBookmark
                 mBind.diaryList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+               // mAdapterBookmark.notifyDataSetChanged()
+                mBind.diaryList.adapter = mAdapterBookmark
             }
         })
 

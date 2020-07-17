@@ -34,24 +34,13 @@ class SplashActivity : AppCompatActivity() {
     private fun customInit() {
         lifecycleScope.launch {
             delay(2000)
-            jobMoveHome()
+            finish()
         }
     }
 
     private fun setupEvents() {
 
     }
-
-
-    private fun jobMoveHome() {
-        Activities.startLaunchActivityFromSplash(thisActivity())
-        finish()
-    }
-
-    private fun thisActivity(): SplashActivity {
-        return this
-    }
-
 
     override fun finish() {
         overridePendingTransition(0, 0)
