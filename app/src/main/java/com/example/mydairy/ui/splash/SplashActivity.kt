@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.mydairy.R
 import com.example.mydairy.databinding.ActivitySplashBinding
-import common.lib.Activities
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

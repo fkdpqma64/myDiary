@@ -8,11 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.mydairy.R
 import com.example.mydairy.databinding.ActivitySplashBinding
-import com.example.mydairy.ui.splash.SplashActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity() {
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, LoginActivity::class.java)
