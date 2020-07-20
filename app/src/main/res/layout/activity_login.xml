@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:textColor="@color/colorPrimary"
+            android:layout_marginTop="24dp"
             android:textSize="32sp"
             app:layout_constraintBottom_toTopOf="@+id/username"
             app:layout_constraintEnd_toEndOf="parent"
@@ -24,9 +25,9 @@
             android:id="@+id/username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="32dp"
             android:autofillHints="@string/prompt_email"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -39,9 +40,9 @@
             android:id="@+id/password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="32dp"
             android:autofillHints="@string/prompt_password"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
@@ -86,22 +87,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="56dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login">
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_google"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_facebook"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_twitter"/>
 
         </LinearLayout>
 
